@@ -2,6 +2,7 @@ import { createContext } from "react"
 import { products } from "../assets/assets"
 import { useState } from "react"
 
+
 export const ShopContext = createContext()
 
 const ShopContextProvider = ( props) => {
