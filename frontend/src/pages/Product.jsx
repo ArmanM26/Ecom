@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { assets } from '../assets/assets';
 import { useContext, useState } from 'react';
 import { ShopContext } from '../context/ShopContext.jsx';
+import RelatedProducts from '../components/RelatedProducts.jsx';
 
 const Product = () => {
 
@@ -62,7 +63,8 @@ const Product = () => {
           <p>Select Size</p>
           <div className='flex gap-2'>
             {productData.sizes.map((item, index) => (
-              <button onClick={()=>setSize(item)} className={`border py-2 px-4 bg-gray-100 ${item === size ? 'border-orange-500' : ''} cursor-pointer`}>{item}</button>
+              <button     key={index}
+ onClick={()=>setSize(item)} className={`border py-2 px-4 bg-gray-100 ${item === size ? 'border-orange-500' : ''} cursor-pointer`}>{item}</button>
             ))}
           </div>
         </div>
@@ -89,6 +91,10 @@ const Product = () => {
 E-commerce websites typically display products or services along with detailed descriptions, images, prices, and any available variations (e.g., sizes, colors). Each product usually has its own dedicated page with relevant information.</p>
         </div>
       </div>
+
+      {/*Display Related Products */}
+
+      <RelatedProducts category={productData.category} subCategory={productData.subCategory} />
 
     </div>
   ) : <div className='opacity-0'></div> 
