@@ -1,11 +1,19 @@
 import { v2 as cloudinary } from "cloudinary";
-import productModel from "../models/productModel";
+import productModel from "../models/productModel.js";
 
 // function for add products
 const addProduct = async (req, res) => {
   try {
-    const { name, description, price, category, subCategory, bestseller } =
-      req.body;
+    const {
+      name,
+      description,
+      price,
+      category,
+      subCategory,
+      bestseller,
+      size,
+    } = req.body;
+
     const image1 = req.files.image1 && req.files.image1[0];
     const image2 = req.files.image2 && req.files.image2[0];
     const image3 = req.files.image3 && req.files.image3[0];
@@ -31,7 +39,7 @@ const addProduct = async (req, res) => {
       price: Number(price),
       subCategory,
       bestseller: bestseller === "true" ? true : false,
-      sizes: JSON.parse(size),
+      size: size && size !== "undefined" ? JSON.parse(size) : [],
       image: imagesUrl,
       date: Date.now(),
     };
