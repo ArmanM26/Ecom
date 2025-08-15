@@ -1,15 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { backendURL } from '../App'
+import axios from 'axios'
 
-const Login = () => {
+
+const Login = ({ setToken }) => {
 
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
 
+
     const onSumbitHandler = async(e)=>{
         try{
-            e.preventDefault()            
+            e.preventDefault() 
+            const response = await axios.post(backendURL+'/api/user/admin',{email,password})
+            if(response.data.success){
+                setToken(response.data.token)
+            }
+            else{
+                toast.erorr(response.data.message)
+            }                
         }catch(error){
+                console.log(error);
+                toast.erorr(response.data.message)
 
+                
         }
     }
 
